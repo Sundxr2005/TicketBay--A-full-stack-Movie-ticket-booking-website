@@ -12,9 +12,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    background: linear-gradient(45deg, #000000, #54525242);
     padding: 15px 30px;
-    color: white;
+    color: #ffcc00;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,9 +25,9 @@ body {
 }
 
 .navbar .search-bar {
-    padding: 8px 15px;
+    padding: 11px 20px;
     font-size: 0.9rem;
-    width: 400px;
+    width: 500px;
     border-radius: 20px;
     border: none;
     outline: none;
@@ -38,12 +38,14 @@ body {
 .navbar .login-btn {
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: #ffffff;
-    color: #ff6f61;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    color: black;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    font-family: 'Poppins';
+    font-weight: bold;
 }
 
 .navbar .login-btn:hover {
@@ -53,9 +55,8 @@ body {
 
 /* Bottom Navbar Styling */
 .navbar-bottom {
-    background-color: #ececec;
     padding: 10px 0;
-    text-align: center;
+    background: linear-gradient(45deg, #000000, #54525242);
 }
 
 .navbar-bottom ul {
@@ -64,6 +65,8 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
+    color: white;
+    font-weight: 700;
 }
 
 .navbar-bottom ul li {
@@ -71,7 +74,7 @@ body {
 }
 
 .navbar-bottom ul li a {
-    color: #000000;
+    color: #ffffff;
     font-size: 1.1rem;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -126,205 +129,31 @@ body {
 
 /* Book Ticket Button under Movie */
 .movie-card button {
-    margin-top: 15px;
+    margin-top: auto;
     padding: 15px 25px;
-    font-size: 1.1rem;
-    border-radius: 30px;
-    background-color: #ffcc00;
-    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    border-radius: 45px;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    color: rgb(0 0 0);
     border: none;
     cursor: pointer;
     display: block;
     width: 100%;
     text-align: center;
     transition: background-color 0.3s ease;
+    font-weight: 700;
+    font-family: 'Poppins';
 }
 
 .movie-card button:hover {
     background-color: #e6b800;
+    transform: scale(1.05);
 }
 
-/* Modal Styling */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: #fff;
-    padding: 2em;
-    border-radius: 8px;
-    width: 350px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1em;
-}
-
-.modal-content button {
-    margin-top: 1em;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 1rem;
-    background-color: #ffcc00;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.modal-content button:hover {
-    background-color: #e6b800;
-}
-
-input[type="number"] {
-    width: 70%;
-    padding: 0.7em;
-    margin: 1em 0;
-    font-size: 1rem;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    text-align: center;
-}
-
-/* Close Modal Button */
-#close-modal {
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-#close-modal:hover {
-    background-color: #e06e5e;
-}
-
-/* Full-page grid container for seats */
-#seats-container {
-    display: grid;
-    grid-template-columns: repeat(20, 40px); /* 20 seats per row */
-    gap: 15px; /* Increased gap between seats */
-    padding: 20px;
-    justify-content: center;
-    background-color: #f5f5f5;
-    overflow-y: auto;
-    height: 100vh;
-}
-.seat.booked {
-    background-color: #f44336;
-}
-
-.seat.selected {
-    background-color: #FF9800;
-}
-
-.seat:hover {
-    opacity: 0.8;
-}
-
-/* Aisle space */
-.aisle {
-    grid-column: span 4; /* Add spacing between seat rows for aisles */
-    height: 10px;
-    background-color: transparent;
-}
-
-.seat.selected:hover {
-    opacity: 1;
-}
-
-
-/* Add gap every 5th row (to create space between blocks of rows) */
-#seats-container .row:nth-child(5n) {
-    margin-bottom: 40px;  /* Adjust to create a visible gap every 5th row */
-}
-
-/* Individual seat styles */
-.seat {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-/* Available seat style */
-.seat.available {
-    background-color: #4CAF50;
-}
-
-/* Booked seat style */
-
-/* Selected seat style */
-.seat.selected {
-    background-color: #FF9800;
-    transform: scale(1.1); /* Slightly enlarge selected seat */
-}
-
-/* Hover effect for any seat */
-.seat:hover {
-    opacity: 0.8;
-    transform: scale(1.05); /* Slightly enlarge on hover */
-}
-
-.seat.selected:hover {
-    opacity: 1;
-    transform: scale(1.15); /* More prominent hover effect for selected seat */
-}
-/* Movie Info Section */
-.movie-info {
-    text-align: center;
-    margin: 30px 0;
-}
-
-#movie-poster {
-    max-width: 20%; /* Ensure the image doesn't overflow */
-    height: auto;
-    display: block;
-    margin: 0 0 0 80px;
-    margin-right: 40px; 
-}
-
+/* Styling for Movie Name */
 #movie-name {
     font-size: 1.8rem;
     font-weight: 600;
     color: #ffffff;
     margin-top: 20px;
 }
-.movie-box {
-    display: flex;
-    align-items: center;
-    background-color: #202020;
-    padding: 20px;
-    width: 100%;
-}
-/* Movie image inside the movie box */
-.movie-box img {
-    border-radius: 20px; /* More rounded corners */
-    box-shadow: none; /* Remove shadow */
-}
-
-
-/* Movie Details Styling */
-.movie-details {
-    flex-grow: 2;
-}
-

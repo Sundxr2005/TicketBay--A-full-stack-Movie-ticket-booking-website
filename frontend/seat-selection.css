@@ -6,15 +6,14 @@ body {
     background-color: #121212;
     color: #ffffff;
 }
-
 /* Navbar Styling */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    background: linear-gradient(45deg, #000000, #54525242);
     padding: 15px 30px;
-    color: white;
+    color: #ffcc00;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -25,9 +24,9 @@ body {
 }
 
 .navbar .search-bar {
-    padding: 8px 15px;
+    padding: 11px 20px;
     font-size: 0.9rem;
-    width: 400px;
+    width: 500px;
     border-radius: 20px;
     border: none;
     outline: none;
@@ -38,22 +37,25 @@ body {
 .navbar .login-btn {
     padding: 10px 20px;
     font-size: 1rem;
-    background-color: #ffffff;
-    color: #ff6f61;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    color: black;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
+    font-family: 'Poppins';
+    font-weight: bold;
 }
 
 .navbar .login-btn:hover {
     background-color: #ffe0b2;
     transform: scale(1.05);
 }
+
+/* Bottom Navbar Styling */
 .navbar-bottom {
-    background-color: #ececec;
     padding: 10px 0;
-    text-align: center;
+    background: linear-gradient(45deg, #000000, #54525242);
 }
 
 .navbar-bottom ul {
@@ -62,6 +64,8 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
+    color: white;
+    font-weight: 700;
 }
 
 .navbar-bottom ul li {
@@ -69,7 +73,7 @@ body {
 }
 
 .navbar-bottom ul li a {
-    color: #000000;
+    color: #ffffff;
     font-size: 1.1rem;
     text-decoration: none;
     transition: color 0.3s ease;
