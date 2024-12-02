@@ -1,0 +1,195 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    padding: 15px 30px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .brand-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.navbar .search-bar {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    width: 400px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.navbar .login-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #ff6f61;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .login-btn:hover {
+    background-color: #ffe0b2;
+    transform: scale(1.05);
+}
+.navbar-bottom {
+    background-color: #ececec;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar-bottom ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-bottom ul li {
+    margin: 0 20px;
+}
+
+.navbar-bottom ul li a {
+    color: #000000;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar-bottom ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Movie Box Styling */
+.movie-box {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 20px 30px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 80%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.movie-box img {
+    max-width: 200px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.movie-details h2 {
+    font-size: 2rem;
+    color: #ffcc00;
+}
+
+/* Seats Container */
+#seats-container {
+    display: grid;
+    grid-template-columns: repeat(20, 50px);
+    gap: 15px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 87%;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    height: auto;
+}
+
+/* Seat Styles */
+.seat {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent; /* Default border for available seats */
+}
+
+.seat.available {
+    background-color: transparent;
+    border-color: #4caf50; /* Green border to match background */
+}
+
+.seat.booked {
+    background-color: transparent;
+    border-color: #ff0000; 
+}
+
+.seat.selected {
+    background-color: #4caf50; /* Fully green when selected */
+    border-color: #4caf50; /* Matching green border */
+    transform: scale(1.1);
+}
+
+.seat:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Aisle Styling */
+.aisle {
+    grid-column: span 4;
+    background: transparent;
+    height: 10px;
+}
+
+/* Buttons */
+#book-seats-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#book-seats-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #121212;
+    color: #ffffff;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+#movie-language {
+    margin-top: -25px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}

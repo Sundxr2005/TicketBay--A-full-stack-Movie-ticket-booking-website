@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TicketBay.com</title>
+
+  <!-- Google Fonts link for "Poppins" font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+        <span class="brand-name">🎟️ TicketBay</span>
+    </div>
+    <div class="navbar-center">
+        <input type="text" placeholder="Search movies..." class="search-bar">
+    </div>
+    <div class="navbar-right">
+        <button class="login-btn">Login</button>
+    </div>
+</nav>
+
+  <!-- Bottom Navbar (New) -->
+  <nav class="navbar-bottom">
+    <ul>
+      <li><a href="/sports">Sports</a></li>
+      <li><a href="/activities">Activities</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/theatres">Theatres</a></li>
+    </ul>
+  </nav>
+
+  <!-- Movies Grid Section -->
+  <div class="movies">
+    <!-- Movies will be dynamically loaded here -->
+  </div>
+
+  <!-- Ticket Booking Modal -->
+  <div id="ticket-modal" class="modal">
+    <div class="modal-content">
+      <h2>Book Ticket</h2>
+      <form id="ticket-form">
+        <label for="ticket-quantity">Number of Tickets:</label>
+        <input type="number" id="ticket-quantity" name="tickets" min="1" required />
+        <button type="submit" class="book-ticket-btn">Book</button>
+        <button type="button" id="close-modal">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

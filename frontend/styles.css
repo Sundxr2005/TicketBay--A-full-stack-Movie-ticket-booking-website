@@ -1,0 +1,330 @@
+/* Apply the Poppins font to the entire body */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Navbar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    padding: 15px 30px;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .brand-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.navbar .search-bar {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    width: 400px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.navbar .login-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #ff6f61;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar .login-btn:hover {
+    background-color: #ffe0b2;
+    transform: scale(1.05);
+}
+
+/* Bottom Navbar Styling */
+.navbar-bottom {
+    background-color: #ececec;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar-bottom ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-bottom ul li {
+    margin: 0 20px;
+}
+
+.navbar-bottom ul li a {
+    color: #000000;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar-bottom ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Movie Grid */
+.movies {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+
+/* Movie Card Styling */
+.movie-card {
+    max-width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+}
+
+.movie-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.movie-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+.movie-card h3 {
+    margin: 15px 0;
+    font-weight: 700;
+    color: #ffcc00;
+    font-size: 1.3rem;
+}
+
+.movie-card p {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+/* Book Ticket Button under Movie */
+.movie-card button {
+    margin-top: 15px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    background-color: #ffcc00;
+    color: rgb(0, 0, 0);
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.movie-card button:hover {
+    background-color: #e6b800;
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+}
+
+.modal-content button {
+    margin-top: 1em;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    background-color: #ffcc00;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #e6b800;
+}
+
+input[type="number"] {
+    width: 70%;
+    padding: 0.7em;
+    margin: 1em 0;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Close Modal Button */
+#close-modal {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#close-modal:hover {
+    background-color: #e06e5e;
+}
+
+/* Full-page grid container for seats */
+#seats-container {
+    display: grid;
+    grid-template-columns: repeat(20, 40px); /* 20 seats per row */
+    gap: 15px; /* Increased gap between seats */
+    padding: 20px;
+    justify-content: center;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+    height: 100vh;
+}
+.seat.booked {
+    background-color: #f44336;
+}
+
+.seat.selected {
+    background-color: #FF9800;
+}
+
+.seat:hover {
+    opacity: 0.8;
+}
+
+/* Aisle space */
+.aisle {
+    grid-column: span 4; /* Add spacing between seat rows for aisles */
+    height: 10px;
+    background-color: transparent;
+}
+
+.seat.selected:hover {
+    opacity: 1;
+}
+
+
+/* Add gap every 5th row (to create space between blocks of rows) */
+#seats-container .row:nth-child(5n) {
+    margin-bottom: 40px;  /* Adjust to create a visible gap every 5th row */
+}
+
+/* Individual seat styles */
+.seat {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Available seat style */
+.seat.available {
+    background-color: #4CAF50;
+}
+
+/* Booked seat style */
+
+/* Selected seat style */
+.seat.selected {
+    background-color: #FF9800;
+    transform: scale(1.1); /* Slightly enlarge selected seat */
+}
+
+/* Hover effect for any seat */
+.seat:hover {
+    opacity: 0.8;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.seat.selected:hover {
+    opacity: 1;
+    transform: scale(1.15); /* More prominent hover effect for selected seat */
+}
+/* Movie Info Section */
+.movie-info {
+    text-align: center;
+    margin: 30px 0;
+}
+
+#movie-poster {
+    max-width: 20%; /* Ensure the image doesn't overflow */
+    height: auto;
+    display: block;
+    margin: 0 0 0 80px;
+    margin-right: 40px; 
+}
+
+#movie-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 20px;
+}
+.movie-box {
+    display: flex;
+    align-items: center;
+    background-color: #202020;
+    padding: 20px;
+    width: 100%;
+}
+/* Movie image inside the movie box */
+.movie-box img {
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: none; /* Remove shadow */
+}
+
+
+/* Movie Details Styling */
+.movie-details {
+    flex-grow: 2;
+}
+

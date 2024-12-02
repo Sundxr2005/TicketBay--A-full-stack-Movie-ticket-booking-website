@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Seat</title>
+    <link rel="stylesheet" href="seat-selection.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="brand-name">🎟️ TicketBay</span>
+        </div>
+        <div class="navbar-center">
+            <input type="text" placeholder="Search movies..." class="search-bar">
+        </div>
+        <div class="navbar-right">
+            <button class="login-btn">Login</button>
+        </div>
+    </nav>
+    <nav class="navbar-bottom">
+        <ul>
+          <li><a href="/sports">Sports</a></li>
+          <li><a href="/activities">Activities</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/theatres">Theatres</a></li>
+        </ul>
+      </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="movie-box">
+            <img id="movie-poster" src="" alt="Movie Poster" />
+            <div class="movie-details">
+                <h2 id="movie-name">Movie Name</h2>
+                <p id="movie-language">Language: English</p>
+                <p id="movie-genre">Action</p>
+                <p id="movie-description">A thrilling action-packed movie.</p>
+                <p id="movie-cast">John Doe, Jane Smith</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seat Selection Section -->
+    <section class="seating-section">
+        <h3 class="section-title">Select Your Seats</h3>
+        <div id="seats-container"></div>
+        <button id="book-seats-btn" class="book-btn">Confirm Booking</button>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 TicketBay. All Rights Reserved.</p>
+    </footer>
+
+    <script src="seat-selection.js"></script>
+</body>
+</html>
