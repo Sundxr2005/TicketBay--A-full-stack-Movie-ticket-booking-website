@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get('movieId');
-console.log('Movie ID:', movieId); 
+console.log('Movie ID:', movieId);
 
 if (!movieId) {
     alert('Movie ID not found!');
@@ -9,80 +9,103 @@ if (!movieId) {
 
 const userId = 1; // Assuming the user is logged in with ID = 1
 const seatsContainer = document.getElementById('seats-container');
+const showtimesContainer = document.getElementById('showtimes-container'); // For showtime buttons
 
-// Fetch movie details (name, poster, genre, description, and cast) for the movieId
+// Fetch movie details
 async function fetchMovieDetails() {
     try {
         const response = await fetch(`/movie/${movieId}`);
-        
-        if (!response.ok) {
-            throw new Error('Movie not found');
-        }
+        if (!response.ok) throw new Error('Movie not found');
 
         const movie = await response.json();
-        
-        // Log movie details to see if the posterUrl is present
         console.log('Fetched Movie:', movie);
-        
-        if (!movie.name || !movie.posterUrl || !movie.genre || !movie.description || !movie.cast) {
-            throw new Error('Invalid movie details');
-        }
 
-        // Update the movie info section
-        const movieNameElement = document.getElementById('movie-name');
-        const moviePosterElement = document.getElementById('movie-poster');
-        const movieLanguageElement = document.getElementById('movie-language');
-        const movieGenreElement = document.getElementById('movie-genre');
-        const movieDescriptionElement = document.getElementById('movie-description');
-        const movieCastElement = document.getElementById('movie-cast');
+        // Populate movie details
+        document.getElementById('movie-name').textContent = movie.name;
+        document.getElementById('movie-language').textContent = movie.language;
+        document.getElementById('movie-genre').textContent = `Genre: ${movie.genre}`;
+        document.getElementById('movie-description').textContent = `About the movie: ${movie.description}`;
+        document.getElementById('movie-cast').textContent = `Cast: ${movie.cast}`;
+        document.getElementById('movie-poster').src = movie.posterUrl || '';
+        document.getElementById('movie-poster').alt = movie.name;
 
-        movieNameElement.textContent = movie.name;
-        movieLanguageElement.textContent = `${movie.language}`;
-        movieGenreElement.textContent = `Genre: ${movie.genre}`;
-        movieDescriptionElement.textContent = `About the movie: ${movie.description}`;
-        movieCastElement.textContent = `Cast: ${movie.cast}`;
-
-        // Log the poster URL
-        console.log('Movie Poster URL:', movie.posterUrl);
-
-        // Check if the poster URL is valid
-        if (movie.posterUrl && moviePosterElement) {
-            moviePosterElement.src = movie.posterUrl; // Set the movie poster
-            moviePosterElement.alt = movie.name; // Set the alt text for the image
-        } else {
-            console.error('Poster URL is missing or invalid');
-        }
-
+        // Fetch available showtimes
+        fetchShowtimes(movieId);
     } catch (error) {
         console.error('Error fetching movie details:', error);
         alert('Failed to load movie details.');
     }
 }
 
-// Fetch seats data
-async function fetchSeats() {
+// Fetch showtimes and create buttons
+async function fetchShowtimes(movieId) {
+    console.log('Fetching showtimes for movieId:', movieId); // Debug movieId
     try {
-        const response = await fetch(`/seats/${movieId}`);
+        const response = await fetch(`/showtimes/${movieId}`);
+        if (!response.ok) throw new Error('Showtimes not found');
+
+        const showtimes = await response.json();
+        console.log('Fetched Showtimes:', showtimes);
+
+        // Create a button for each showtime
+        showtimesContainer.innerHTML = '';
+        showtimes.forEach(showtime => {
+            const button = document.createElement('button');
+            button.classList.add('showtime-btn');
+            button.textContent = `${showtime.show_time}`;
+            button.dataset.showtimeId = showtime.id;
+            console.log('Button Data:', button.dataset.showtimeId); // Debug button dataset
+
+            // Add click event to fetch seats and set active state
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.showtime-btn').forEach(btn => btn.classList.remove('selected'));
+
+                // Set clicked button as selected
+                button.classList.add('selected');
+
+                // Fetch seats for the selected showtime
+                fetchSeats(showtime.id);
+            });
+
+            showtimesContainer.appendChild(button);
+        });
+
+        // Automatically fetch seats for the first showtime and mark it as selected
+        if (showtimes.length > 0) {
+            const firstShowtimeButton = showtimesContainer.querySelector('.showtime-btn');
+            firstShowtimeButton.classList.add('selected');
+            fetchSeats(showtimes[0].id);
+        }
+    } catch (error) {
+        console.error('Error fetching showtimes:', error);
+        alert('Failed to load showtimes.');
+    }
+}
+
+// Fetch seat layout for a showtime
+async function fetchSeats(showtimeId) {
+    try {
+        const response = await fetch(`/seats/${movieId}/${showtimeId}`);
+        if (!response.ok) throw new Error('Seats not found');
+
         const seats = await response.json();
+        console.log('Fetched Seats:', seats);
 
-        seatsContainer.innerHTML = ''; // Clear the container before re-rendering
-
-        // Loop through the seats and create the layout
-        let rowCounter = 0;  // Track rows
+        // Populate seats container
+        seatsContainer.innerHTML = '';
         seats.forEach((seat, index) => {
             const seatDiv = document.createElement('div');
             seatDiv.classList.add('seat', seat.isBooked ? 'booked' : 'available');
             seatDiv.textContent = seat.seatNumber;
-            seatDiv.dataset.seatNumber = seat.seatNumber;
 
-            // Only add a click event for available seats
             if (!seat.isBooked) {
                 seatDiv.addEventListener('click', () => toggleSeatSelection(seatDiv));
             }
 
             seatsContainer.appendChild(seatDiv);
 
-            // Every 20th seat, add a break (aisle) after it
+            // Add aisle after every 20th seat
             if ((index + 1) % 20 === 0) {
                 const aisleDiv = document.createElement('div');
                 aisleDiv.classList.add('aisle');
@@ -91,58 +114,66 @@ async function fetchSeats() {
         });
     } catch (error) {
         console.error('Error fetching seats:', error);
-        alert('Failed to load seat data.');
+        alert('Failed to load seats.');
+    }
+}
+function toggleFloatingButton() {
+    const selectedSeats = document.querySelectorAll('.seat.selected').length;
+    const bookButton = document.getElementById('book-seats-btn');
+    if (selectedSeats > 0) {
+        bookButton.classList.add('show');
+    } else {
+        bookButton.classList.remove('show');
     }
 }
 
+// Update seat selection logic to call toggleFloatingButton
 function toggleSeatSelection(seatDiv) {
-    // If the seat is already selected, deselect it
     if (seatDiv.classList.contains('selected')) {
         seatDiv.classList.remove('selected');
-    } 
-    // If it's not selected and less than 5 seats are selected, select it
-    else if (document.querySelectorAll('.seat.selected').length < 5) {
+    } else if (document.querySelectorAll('.seat.selected').length < 5) {
         seatDiv.classList.add('selected');
-    } 
-    // Show an alert if more than 5 seats are selected
-    else {
-        alert('You can select a maximum of 5 seats.');
+    } else {
+        alert('You can select up to 5 seats only.');
     }
+    toggleFloatingButton(); // Update button visibility
 }
-
+// Handle seat booking
 document.getElementById('book-seats-btn').addEventListener('click', async () => {
     const selectedSeats = document.querySelectorAll('.seat.selected');
-    const seatNumbers = Array.from(selectedSeats).map(seat => seat.dataset.seatNumber);
+    const seatNumbers = Array.from(selectedSeats).map(seat => seat.textContent);
+    const selectedShowtimeId = document.querySelector('.showtime-btn.selected')?.dataset.showtimeId;
 
-    if (seatNumbers.length > 0) {
-        console.log('Sending the following data to the server:', { movieId, userId, seats: seatNumbers }); // Log the data
+    if (!selectedShowtimeId) {
+        alert('Please select a showtime.');
+        return;
+    }
 
-        try {
-            const response = await fetch('/book-seats', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ movieId, userId, seats: seatNumbers }),
-            });
+    if (seatNumbers.length === 0) {
+        alert('Please select at least one seat.');
+        return;
+    }
 
-            if (response.ok) {
-                alert('Seats booked successfully!');
-                window.location.href = '/';
-            } else {
-                alert('Error booking seats');
-            }
-        } catch (error) {
-            console.error('Error booking seats:', error);
-            alert('Error booking seats');
+    try {
+        const response = await fetch('/book-seats', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ movieId, userId, seats: seatNumbers, showtimeId: selectedShowtimeId }),
+        });
+
+        if (response.ok) {
+            alert('Seats booked successfully!');
+            // Refresh seats for the selected showtime
+            fetchSeats(selectedShowtimeId);
+        } else {
+            const errorMessage = await response.text();
+            alert(`Failed to book seats: ${errorMessage}`);
         }
-    } else {
-        alert('Please select seats to book');
+    } catch (error) {
+        console.error('Error booking seats:', error);
+        alert('Error booking seats.');
     }
 });
 
-// Fetch movie details when the page loads
+// Fetch movie details on page load
 fetchMovieDetails();
-
-// Fetch seats data
-fetchSeats();

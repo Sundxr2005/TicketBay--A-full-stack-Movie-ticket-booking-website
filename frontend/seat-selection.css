@@ -173,14 +173,14 @@ body {
     background: linear-gradient(45deg, #ff6f61, #ffcc00);
     border: none;
     border-radius: 30px;
-    color: white;
+    color: #000000;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #book-seats-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
+    box-shadow: 0 4px 15px rgba(4, 255, 0, 0.789);
 }
 
 /* Footer */
@@ -196,4 +196,105 @@ footer {
     margin-top: -25px;
     font-size: 1.5rem;
     color: #ffffff;
+}
+/* Showtimes Section Styling */
+.showtimes-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.showtime {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.showtime p {
+    margin: 0;
+}
+
+.showtime:hover {
+    background-color: #666;
+}
+.showtime-btn {
+    padding: 12px 25px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    width: 200px;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Poppins';
+    font-weight: bold;
+    display: block;
+    border-color: #ff6f61;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.showtime-btn:hover {
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    transform: scale(1.05);
+}
+/* Showtime Button Active Styling */
+.showtime-btn:active {
+    transform: scale(1);
+    box-shadow: none;
+}
+/* Aligning showtimes container properly */
+#showtimes-container {
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+    margin: 0 auto;
+    background-color: #1e1e1e;
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 75%;
+}
+.showtime-btn.selected {
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 70%);
+    color: black;
+   
+}
+#book-tickets-container {
+    position: fixed;
+    bottom: 20px; /* Distance from the bottom */
+    right: 20px; /* Distance from the right */
+    z-index: 1000; /* Ensure it's above other content */
+    display: none; /* Hidden initially */
+}
+/* Floating Book Tickets Button */
+.book-btn.floating {
+    position: fixed;
+    bottom: 20px;
+    right: 650px;
+    z-index: 1000;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff6f61, #ffcc00);
+    border: none;
+    border-radius: 30px;
+    color: #000000;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: none;
+    font-family: 'Poppins';
+    font-weight: bold;
+}
+
+.book-btn.floating.show {
+    display: block; /* Show when seats are selected */
+}
+
+.book-btn.floating:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
 }

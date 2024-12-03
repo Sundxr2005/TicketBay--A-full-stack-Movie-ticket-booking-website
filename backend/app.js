@@ -56,7 +56,6 @@ app.get('/movie/:id', async (req, res) => {
     }
 });
 
-
 // Add a movie with name, genre, and poster URL
 app.post('/add-movie', async (req, res) => {
     const { name, genre, poster_url } = req.body;
@@ -89,31 +88,39 @@ app.post('/book-ticket', async (req, res) => {
     }
 });
 
-// Fetch seat status for a movie (available or booked)
-app.get('/seats/:movieId', async (req, res) => {
-    const { movieId } = req.params;
+// Fetch seat status for a movie (available or booked) for a specific showtime
+app.get('/seats/:movieId/:showtimeId', async (req, res) => {
+    const { movieId, showtimeId } = req.params;
     try {
         const seats = [];
         const totalSeats = 300; // Assuming 300 seats for the movie
+
+        // Fetch the seat booking status for the given movie and showtime
         for (let i = 1; i <= totalSeats; i++) {
-            const [rows] = await db.query('SELECT * FROM bookings WHERE movie_id = ? AND seat_number = ?', [movieId, i]);
+            const [rows] = await db.query('SELECT * FROM bookings WHERE movie_id = ? AND showtime_id = ? AND seat_number = ?', [movieId, showtimeId, i]);
             seats.push({ seatNumber: i, isBooked: rows.length > 0 });
         }
 
+        // Send seats data as JSON response
         res.json(seats);
     } catch (error) {
         console.error('Error fetching seats:', error);
-        res.status(500).send('Error fetching seats');
+        res.status(500).json({ error: 'Error fetching seats' });
     }
 });
 
 // Book selected seats for a user
 app.post('/book-seats', async (req, res) => {
-    const { movieId, seats, userId } = req.body;
+    const { movieId, seats, userId, showtimeId } = req.body;
+
+    if (!showtimeId) {
+        return res.status(400).send('Showtime ID is required.');
+    }
+
     try {
         const unavailableSeats = [];
         for (const seat of seats) {
-            const [rows] = await db.query('SELECT * FROM bookings WHERE movie_id = ? AND seat_number = ?', [movieId, seat]);
+            const [rows] = await db.query('SELECT * FROM bookings WHERE movie_id = ? AND showtime_id = ? AND seat_number = ?', [movieId, showtimeId, seat]);
             if (rows.length > 0) {
                 unavailableSeats.push(seat);
             }
@@ -124,15 +131,32 @@ app.post('/book-seats', async (req, res) => {
         }
 
         for (const seat of seats) {
-            await db.query('INSERT INTO bookings (movie_id, user_id, seat_number) VALUES (?, ?, ?)', [movieId, userId, seat]);
+            await db.query('INSERT INTO bookings (movie_id, user_id, seat_number, showtime_id) VALUES (?, ?, ?, ?)', [movieId, userId, seat, showtimeId]);
         }
 
         res.send('Seats booked successfully!');
     } catch (error) {
         console.error('Error booking seats:', error);
-        res.status(500).send(`Error booking seats: ${error.message}`);
+        res.status(500).send('Error booking seats');
     }
 });
+
+
+// Fetch showtimes for a specific movie
+app.get('/showtimes/:movieId', async (req, res) => {
+    const { movieId } = req.params;
+    try {
+        const [showtimes] = await db.query('SELECT * FROM showtimes WHERE movie_id = ?', [movieId]);
+        if (!showtimes || showtimes.length === 0) {
+            return res.status(404).json({ error: 'No showtimes found for this movie.' });
+        }
+        res.json(showtimes);
+    } catch (error) {
+        console.error('Error fetching showtimes:', error);
+        res.status(500).send('Error fetching showtimes');
+    }
+});
+
 
 // Serve index.html
 app.get('/', (req, res) => {
