@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Payment Interface</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./payment.css" />
+  </head>
+  <body>
+    <div class="payment-container">
+      <h2>Complete Your Payment</h2>
+
+      <!-- Payment Method Tabs -->
+      <div class="payment-methods">
+        <div class="payment-method-tab active" data-method="card">
+          <i class="ri-bank-card-line"></i> Card
+        </div>
+        <div class="payment-method-tab" data-method="upi">
+          <i class="ri-qr-code-line"></i> UPI
+        </div>
+      </div>
+
+      <!-- Card Payment Form -->
+      <form id="card-payment-form" class="payment-form">
+        <div class="input-group">
+          <label for="cardholder-name">Cardholder Name</label>
+          <input
+            type="text"
+            id="cardholder-name"
+            placeholder="John Doe"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label for="card-number">Card Number</label>
+          <input
+            type="text"
+            id="card-number"
+            placeholder="1234 5678 9012 3456"
+            maxlength="19"
+            required
+          />
+        </div>
+
+        <div class="input-group-row">
+          <div class="input-group">
+            <label for="expiry-date">Expiry Date</label>
+            <input
+              type="text"
+              id="expiry-date"
+              placeholder="MM/YY"
+              maxlength="5"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="cvv">CVV</label>
+            <input
+              type="password"
+              id="cvv"
+              placeholder="123"
+              maxlength="3"
+              required
+            />
+          </div>
+        </div>
+
+        <button type="submit" class="pay-btn">
+          Pay Now <i class="ri-arrow-right-line"></i>
+        </button>
+      </form>
+
+      <!-- UPI Payment Form -->
+      <div id="upi-payment-form" class="payment-form" style="display: none">
+        <div class="upi-options">
+          <div class="upi-option">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/200px-UPI-Logo-vector.svg.png"
+              alt="Google Pay"
+            />
+            <span>Google Pay</span>
+          </div>
+          <div class="upi-option">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/PhonePe_Logo.svg/200px-PhonePe_Logo.svg.png"
+              alt="PhonePe"
+            />
+            <span>PhonePe</span>
+          </div>
+          <div class="upi-option">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/200px-Paytm_Logo_%28standalone%29.svg.png"
+              alt="Paytm"
+            />
+            <span>Paytm</span>
+          </div>
+        </div>
+
+        <div class="qr-code-container">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+            alt="UPI QR Code"
+            id="upi-qr-code"
+          />
+          <p>Scan QR code using any UPI app</p>
+        </div>
+
+        <div class="input-group">
+          <label for="upi-id">UPI ID (Optional)</label>
+          <input type="text" id="upi-id" placeholder="yourname@upi" />
+        </div>
+
+        <button type="button" class="pay-btn">
+          Pay with UPI <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+    </div>
+
+    <script src="./payment.js"></script>
+  </body>
+</html>

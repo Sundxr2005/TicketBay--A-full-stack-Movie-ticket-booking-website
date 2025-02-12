@@ -1,0 +1,303 @@
+/* Root Variables */
+:root {
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --card-bg: rgba(30, 41, 59, 0.95);
+  --input-bg: rgba(38, 43, 51, 0.7);
+  --border-color: rgba(45, 51, 57, 0.5);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-color: #6366f1;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --error-color: #ef4444;
+  --success-color: #10b981;
+  --glow-color: rgba(99, 102, 241, 0.15);
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg-gradient);
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text-primary);
+}
+
+/* Container Styles */
+.payment-container {
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 28px;
+  width: 440px;
+  position: relative;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 26px;
+}
+
+/* Payment Methods Tabs */
+.payment-methods {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.payment-method-tab {
+  padding: 14px 28px;
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-secondary);
+  background: var(--input-bg);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-method-tab:hover {
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+}
+
+.payment-method-tab.active {
+  background: var(--accent-gradient);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 10px 20px -10px var(--accent-color);
+}
+
+/* Form Styles */
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-group-row {
+  display: flex;
+  gap: 16px;
+}
+
+.input-group-row .input-group {
+  flex: 1;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  background: var(--input-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 4px var(--glow-color);
+}
+
+/* Button Styles */
+.pay-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -12px var(--accent-color);
+}
+
+/* UPI Payment Styles */
+.upi-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.upi-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 15px;
+  background: var(--input-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.upi-option:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  background: rgba(99, 102, 241, 0.1);
+  box-shadow: 0 8px 16px -8px var(--accent-color);
+}
+
+.upi-option.selected {
+  border-color: var(--accent-color);
+  background: rgba(99, 102, 241, 0.15);
+  box-shadow: 0 8px 16px -8px var(--accent-color);
+}
+
+.upi-option img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  filter: brightness(0.9);
+  pointer-events: none; /* Prevent image from interfering with clicks */
+}
+
+.upi-option:hover img {
+  filter: brightness(1);
+  transform: scale(1.05);
+}
+
+.upi-option span {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  pointer-events: none; /* Prevent text from interfering with clicks */
+}
+
+.upi-option:hover span {
+  color: var(--text-primary);
+}
+
+/* Active/Selected state */
+.upi-option:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 8px -4px var(--accent-color);
+}
+
+/* Make sure the container is visible */
+#upi-payment-form {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#upi-payment-form[style*="display: none"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* QR Code Container */
+.qr-code-container {
+  margin: 30px auto;
+  padding: 30px;
+  border: 2px dashed var(--border-color);
+  border-radius: 18px;
+  text-align: center;
+  max-width: 280px;
+}
+
+.qr-code-container img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.qr-code-container p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* Toast Notifications */
+.error-toast,
+.success-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 32px;
+  border-radius: 14px;
+  color: white;
+  font-weight: 500;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+}
+
+.error-toast {
+  background: rgba(239, 68, 68, 0.95);
+  box-shadow: 0 8px 16px rgba(239, 68, 68, 0.2);
+}
+
+.success-toast {
+  background: rgba(16, 185, 129, 0.95);
+  box-shadow: 0 8px 16px rgba(16, 185, 129, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .payment-container {
+    width: 100%;
+    margin: 20px;
+    padding: 30px 20px;
+  }
+
+  .input-group-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
